@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ginna Sandhu - Miss Universe Edition 4.0</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+
+<style>
+body{
+margin:0;
+background:black;
+color:white;
+font-family:'Poppins',sans-serif;
+overflow-x:hidden;
+text-align:center;
+}
+
+/* LOCK SCREEN */
+#lock{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+}
+
+input{
+padding:10px;
+border-radius:5px;
+border:none;
+}
+
+button{
+padding:10px 20px;
+margin-top:10px;
+border:none;
+border-radius:5px;
+background:pink;
+color:black;
+cursor:pointer;
+}
+
+/* INTRO VIDEO */
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:none;
+z-index:999;
+}
+
+video{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* BOOK */
+#book{
+width:350px;
+height:500px;
+margin:50px auto;
+}
+
+#book div{
+background:#111;
+padding:20px;
+border-radius:10px;
+}
+
+#book img{
+width:100%;
+border-radius:10px;
+}
+
+/* Floating hearts */
+.heart{
+position:fixed;
+color:pink;
+animation:float 6s linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+/* Lily background */
+.lily{
+position:fixed;
+bottom:0;
+left:0;
+width:150px;
+animation:move 8s infinite alternate;
+opacity:0.8;
+}
+@keyframes move{
+0%{transform:translateX(0);}
+100%{transform:translateX(50px);}
+}
+
+/* Surprise */
+#surprise{
+display:none;
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+color:white;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-size:40px;
+z-index:10000;
+}
+
+/* Countdown */
+#countdown{
+color:pink;
+margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div id="lock">
+<h2>🔒 Enter Password</h2>
+<p>Question: Arman's birth date?</p>
+<input type="password" id="password">
+<button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- INTRO VIDEO -->
+<div id="intro">
+<video autoplay muted>
+<source src="intro.mp4" type="video/mp4">
+</video>
+</div>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+<source src="more-nain.mp3" type="audio/mp3">
+</audio>
+
+<h1 style="font-family:Dancing Script;font-size:50px;color:pink;">
+Ginna Sandhu 👑 Miss Universe of My Heart
+</h1>
+
+<p>
+ਇਕ ਤੇਰੀ ਮੇਰੀ ਜੋੜੀ <br>
+ਉੱਤੋਂ ਅਕਲ ਦੋਵਾਂ ਨੂੰ ਥੋੜੀ <br>
+ਲੜਦੇ ਭਾਵੇ ਲੱਖ ਰਹੀਏ <br>
+ਪਰ ਅੰਦਰੋ ਪਿਆਰ ਵੀ ਕਰਦੇ ਚੌਰੀ ਚੌਰੀ ❤️
+</p>
+
+<p>
+First seen: 4 August 2025 🌸 <br>
+Request sent: 7 Nov 2025 💌 <br>
+First message: 26 Nov 2025 💕 <br>
+First date outside: 14 Feb 2026 ❤️
+</p>
+
+<div id="countdown"></div>
+
+<!-- BOOK -->
+<div id="book">
+<div>
+<img src="photo1.jpg">
+<p>God’s most beautiful creation ✨</p>
+</div>
+
+<div>
+<img src="photo2.jpg">
+<p>4 August 2025 – The day my world changed 🌎</p>
+</div>
+
+<div>
+<img src="photo3.jpg">
+<p>Miss Universe in my eyes 👑</p>
+<button onclick="openSurprise()">Open Hidden Surprise 💌</button>
+</div>
+</div>
+
+<!-- SURPRISE -->
+<div id="surprise">
+<h1>LOVE YOU 🐼❤️</h1>
+<p>You are my forever, my universe 🌸</p>
+<button onclick="closeSurprise()">Close</button>
+</div>
+
+<img src="lily.png" class="lily">
+
+<script>
+
+function unlock(){
+var pass=document.getElementById("password").value;
+if(pass==="1-08-2006"){
+document.getElementById("lock").style.display="none";
+document.getElementById("intro").style.display="block";
+setTimeout(function(){
+document.getElementById("intro").style.display="none";
+},5000);
+}
+else{
+alert("Wrong password ❌");
+}
+}
+
+/* TURN JS */
+$("#book").turn({
+width:350,
+height:500,
+autoCenter:true
+});
+
+/* HEARTS */
+setInterval(function(){
+var heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},400);
+
+/* COUNTDOWN */
+var start=new Date("Nov 26, 2025 00:00:00").getTime();
+setInterval(function(){
+var now=new Date().getTime();
+var diff=now-start;
+var days=Math.floor(diff/(1000*60*60*24));
+document.getElementById("countdown").innerHTML=
+"Time since first message: "+days+" days ❤️";
+},1000);
+
+function openSurprise(){
+document.getElementById("surprise").style.display="flex";
+}
+function closeSurprise(){
+document.getElementById("surprise").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
